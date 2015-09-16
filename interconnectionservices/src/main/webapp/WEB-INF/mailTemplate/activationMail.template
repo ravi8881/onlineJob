@@ -1,0 +1,270 @@
+<html lang="en">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Waspit</title>
+   <style type="text/css" media="screen">
+      body {
+         background-color: #ebebeb;
+         margin:  30px 0 0 0;
+         padding: 0;font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      }
+
+      a img {
+         border: none;
+      }
+
+      a {
+         border: none;
+      }
+
+      td.permission {
+         padding: 30px 0 10px 0;
+      }
+
+      .permission {
+         font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+         font-size: 10px;
+         color: #666666;
+         padding: 4px 0 4px 0;
+      }
+
+      .permission a {
+         color: #333333;
+      }
+
+      .permission p {
+         margin: 0 0 4px 0;
+      }
+
+      .header {
+         background-color: #fff;
+      }
+
+      .header h1 {
+      	font-family: Georgia;
+      	font-size: 32px;
+      	font-weight: normal;
+      	color: #bfbfbf;
+      	display: inline;
+      	text-align: left;}
+
+      .date h3 {
+      	font-family: Georgia;
+      	font-size: 14px;
+      	color: #bfbfbf;
+      	font-weight: normal;
+      	text-align: right;
+      	display: inline;
+      	font-style: italic;
+      }
+
+      .body {
+         background-color: #ffffff;
+      }
+
+      td.sidebar {
+      	padding: 22px 0 0 0;
+      }
+
+      .sidebar h2 {
+         font-family: Georgia;
+         font-size: 18px;
+         font-weight: bold;
+         color: #808080;
+         margin: 0 0 6px 4px;
+         padding: 0;
+         text-align: left;
+      }
+
+      .sidebar h2.issue {
+         color: #000000;
+         margin: 0 0 10px 10px;
+      }
+
+      .sidebar ul {
+         font-family: Georgia;
+         font-size: 12px;
+         color: #2679b9;
+         margin: 0 0 0 24px;
+         padding: 0;
+         text-align: left;
+      }
+
+      .sidebar ul a {
+      	font-family: Georgia;
+      	font-size: 12px;
+      	color: #2679b9;
+      	font-style: italic;
+      }
+      .sidebar ul li {
+      	margin: 0 0 10px 0;
+      }
+      .sidebar p {
+         font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+         font-size: 11px;
+         color: #5f5f5f;
+         padding: 0;
+         margin: 0 0 10px 0;
+         text-align: left;
+      }
+
+      td.sidebg {
+         background-color: #f1f1f1;
+         padding: 10px 16px 10px 16px;
+      }
+
+      td.mainbar {
+      	padding: 15px 15px 0 15px;
+      	text-align: left;border-top: 1px solid #ededed;
+      }
+
+      .mainbar p {
+      	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      	font-size: 12px;
+      	color: #333333;
+      	margin: 0 0 10px 0;
+      	text-align: left;
+      }
+
+      .mainbar p.first {
+      	margin-top: 10px;
+      }
+
+      .mainbar h2 {
+      	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      	font-size: 20px;
+      	color: #000000;
+      	margin: 10px 0 16px 0;
+      }
+
+      .mainbar h2 a {
+      	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      	font-size: 16px;
+      	color: #000000;
+      	text-transform: uppercase;
+      	text-decoration: none;
+      	font-style: normal;
+      }
+
+      .mainbar a {
+      	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      	font-size: 13px;
+      	color: #2679b9;
+      }
+
+      .mainbar a.center {
+      	font-size: 12px;
+      	text-align: center;
+      	display: block;
+      	color: #999999;
+      	padding: 8px 0 12px 0;
+      	text-decoration: none;
+      }
+
+      .mainbar img.inline {
+      	border: 1px solid #dedede;
+      	padding: 4px;
+      }
+
+      td.footer {
+      	padding: 0 0 10px 0;
+      	border-top: 1px solid #ededed;
+      }
+
+      .footer p {
+      	color: #a1a1a1;
+      	font-size: 11px;
+      	margin: 0;
+      	padding: 0;
+      }
+
+      .footer p.first {
+      	margin: 14px 0 0 0;
+      }
+
+      .footer a {
+      	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      	font-size: 11px;
+      	color: #2679b9;
+      }
+	  
+	  .social  { margin-top:10px; }
+	  .social img { padding:1px; }
+   </style>
+
+</head>
+<body>
+<a name="top" id="top"></a>
+<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ebebeb">
+   <tr>
+      <td align="center">
+         <table width="700" cellspacing="0" cellpadding="0">
+            <tr>
+               <td height="77" align="left" class="header">
+                  <table width="700" border="0" cellspacing="0" cellpadding="0" style="border-top:#32A4DA 0px solid">
+                     <tr>
+                       <td><img src="http://dev.waspit.miracleglobal.com:8080/icon_waspit/waspit.png" width="252" height="82"></td>
+
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+         </table>
+      </td>
+   </tr>
+   <tr>
+      <td align="center">
+         <table width="700" cellspacing="10" cellpadding="0" class="body">
+            <tr>               
+               <td align="center" valign="top" class="mainbar">
+                  <h2>Waspit - Account activated</h2>
+                  
+                  
+                  <p>Dear <strong>_NAME_</strong>,</p>
+                  
+                  <p>Congratulations! Your Waspit registration was successful and your account has been validated.</p>
+       
+     		      <p><a href="_URLACTIVATIONLINK_">Click Here To Verify User</a></p>
+				  <!--
+				  <a href="_MOBILELINK_">Please click here to verify mobile number </a> 
+				  <p><a href="_EMAILLINK_">Please click here to verify email account </a></p> -->
+				  <p>Mobile Activation Code: _MobileCODE_ </a></p>
+				  <p>Email Activation Code: _EmailCODE_ </a></p>
+                  
+			<p>Kind Regards,</p>
+                  
+                  <p>The team at Waspit - <a href="#">www.waspit.com</a></p>
+              
+              </td>
+            </tr>
+            <tr>
+               <td align="center">
+                  <table width="650" border="0" cellspacing="0" cellpadding="0">
+                     <tr>
+                        <td width="526" align="left" class="footer">
+                           <p class="first">For any sales or support, please visit our <a href="#">help centre &#187;</a></p>
+                              <p></p>
+                        </td>
+                        <td width="124" align="left" class="footer"><table width="100%" border="0" cellspacing="0"class="social">
+                          <tr>
+                            <td><a href="#"><img src="http://dev.waspit.miracleglobal.com:8080/icon_waspit/icon-twitter.jpg" width="29" height="28"></a></td>
+                     
+                            <td><a href="#"><img src="http://dev.waspit.miracleglobal.com:8080/icon_waspit/icon-facebook.jpg" width="29" height="28"></a><a href="#"></a></td>
+                            
+                            <td><a href="#"><img src="http://dev.waspit.miracleglobal.com:8080/icon_waspit/icon-youtube.jpg" width="29" height="28"></a></td>
+                            
+                            <td><a href="#"><img src="http://dev.waspit.miracleglobal.com:8080/icon_waspit/icon-linkedin.jpg" width="29" height="28"></a></td>
+                            
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table>
+               </td>
+            </tr>
+         </table>
+      </td>
+   </tr>
+</table>
+
+</body>
+</html>

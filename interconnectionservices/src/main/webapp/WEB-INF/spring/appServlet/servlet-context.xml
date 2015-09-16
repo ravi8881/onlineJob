@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:repository="http://www.springframework.org/schema/data/repository"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="order" value="2" />
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<context:component-scan base-package="com.main.interconnection" />
+	
+
+	<beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<beans:bean
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+
+	<beans:bean id="propFile"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		lazy-init="false">
+		<beans:property name="locations">
+			<beans:list>
+				<beans:value>classpath:database.properties</beans:value>
+				<beans:value>classpath:deals.properties</beans:value>
+				<beans:value>classpath:mail.properties</beans:value>
+				<beans:value>classpath:social.properties</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+
+
+	<beans:bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://localhost:3306/waspit" />
+		<beans:property name="username" value="${jdbc.username}" />
+		<beans:property name="password" value="${jdbc.password}" />
+	</beans:bean>
+
+
+
+	<beans:bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<beans:property name="order" value="1" />
+		<beans:property name="mediaTypes">
+			<beans:map>
+				<beans:entry key="json" value="application/json" />
+				<beans:entry key="xml" value="application/xml" />
+				<beans:entry key="html" value="text/html" />
+
+			</beans:map>
+		</beans:property>
+
+		<beans:property name="defaultViews">
+			<beans:list>
+				<!-- JSON View -->
+				<beans:bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+				</beans:bean>
+
+
+				<!-- JAXB XML View -->
+				<beans:bean
+					class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<beans:constructor-arg>
+						<beans:bean class="org.springframework.oxm.xstream.XStreamMarshaller"
+							p:autodetectAnnotations="true">
+							<beans:property name="aliases">
+								<beans:map>
+
+									<beans:entry key="errorcode"
+										value="com.main.interconnection.clientBo.ErrorCode" />
+									<beans:entry key="errorcode"
+										value="com.main.interconnection.clientBo.Message" />
+									<beans:entry key="customer"
+										value="com.main.interconnection.model.Customer" />
+									<beans:entry key="user"
+										value="com.main.interconnection.clientBo.User" />
+									<beans:entry key="apikey"
+										value="com.main.interconnection.clientBo.ApiKey" />
+									<beans:entry key="state"
+										value="com.main.interconnection.clientBo.State" />
+									<beans:entry key="city"
+										value="com.main.interconnection.clientBo.City" />
+									<beans:entry key="category"
+										value="com.main.interconnection.clientBo.Category" />
+									<beans:entry key="subCategory"
+										value="com.main.interconnection.clientBo.SubCategory" />
+
+									<beans:entry key="category"
+										value="com.main.interconnection.solr.response.venue.PassVenue" />
+									
+									<beans:entry key="usersettings"
+										value="com.main.interconnection.clientBo.UserSettings" />
+
+								</beans:map>
+							</beans:property>
+							<beans:property name="supportedClasses">
+								<beans:list>
+									<beans:value>java.lang.Boolean</beans:value>
+									<beans:value>java.lang.Integer</beans:value>
+									<beans:value>java.util.List</beans:value>
+									<beans:value>org.springframework.web.servlet.ModelAndView
+									</beans:value>
+									<beans:value>org.apache.solr.common.SolrDocumentList
+									</beans:value>
+									<beans:value>java.lang.String</beans:value>
+									<beans:value>com.main.interconnection.clientBo.ErrorCode
+									</beans:value>
+									<beans:value>com.main.interconnection.clientBo.Message
+									</beans:value>
+									<beans:value>com.main.interconnection.model.Customer
+									</beans:value>
+									<beans:value>com.main.interconnection.clientBo.User
+									</beans:value>
+									<beans:value>com.main.interconnection.clientBo.ApiKey
+									</beans:value>
+									<beans:value>com.main.interconnection.clientBo.State
+									</beans:value>
+									<beans:value>com.main.interconnection.clientBo.City
+									</beans:value>
+									<beans:value>com.main.interconnection.clientBo.Category
+									</beans:value>
+									<beans:value>com.main.interconnection.clientBo.UserSettings
+									</beans:value>
+									<beans:value>com.main.interconnection.solr.response.venue.PassVenue
+									</beans:value>
+									<beans:value>com.main.interconnection.clientBo.SubCategory
+									</beans:value>									
+								</beans:list>
+							</beans:property>
+						</beans:bean>
+					</beans:constructor-arg>
+				</beans:bean>
+			</beans:list>
+		</beans:property>
+		<beans:property name="ignoreAcceptHeader" value="true" />
+
+	</beans:bean>
+
+
+
+
+	<beans:bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<beans:property name="order" value="3" />
+	</beans:bean>
+
+	<beans:bean id="solrDocument" class="org.apache.solr.common.SolrInputDocument"
+		scope="prototype" />
+
+	<beans:bean id="mapper" class="org.codehaus.jackson.map.ObjectMapper" />
+
+	<beans:bean id="solrDateUtil" class="com.main.interconnection.util.SolrDateUtil" />
+
+	<beans:bean id="solrUtils" class="com.main.interconnection.solrUtil.SolrUtils"
+		scope="prototype" />
+
+	<beans:bean id="apiDao" class="com.main.interconnection.daoImpl.ApiDaoImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
+	<beans:bean id="mongoCommonClient" class="com.main.interconnection.mongoDaoImpl.MongoCommonClientImpl">
+		<beans:property name="mongoTemplate" ref="mongoTemplate" />
+	</beans:bean>
+
+	<beans:bean id="userDao"
+		class="com.main.interconnection.daoImpl.UserDaoImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
+	<beans:bean id="stateDao"
+		class="com.main.interconnection.daoImpl.StateDaoImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
+	<beans:bean id="cityDao"
+		class="com.main.interconnection.daoImpl.CityDaoImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
+	<beans:bean id="CommonDao"
+		class="com.main.interconnection.daoImpl.CommonDaoImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
+
+	<beans:bean id="thirdPartyRestClient"
+		class="com.main.interconnection.rest.clientImpl.ThirdPartyRestClientImpl" />
+
+	<beans:bean id="commonEmail" class="com.main.interconnection.util.CommonEmail" />
+
+	<beans:bean id="solrCommonClient"
+		class="com.main.interconnection.solrDaoImpl.SolrCommonClientImpl">
+		<beans:constructor-arg ref="restTemplate" />
+		<beans:constructor-arg ref="mapper" />
+		<beans:property name="solrUtils" ref="solrUtils" />
+	</beans:bean>
+
+	<beans:bean id="yelp" class="com.main.interconnection.util.Yelp">
+		<beans:constructor-arg type="java.lang.String"
+			value="${yelp.consumerKey}" />
+		<beans:constructor-arg type="java.lang.String"
+			value="${yelp.consumerSecret}" />
+		<beans:constructor-arg type="java.lang.String"
+			value="${yelp.token}" />
+		<beans:constructor-arg type="java.lang.String"
+			value="${yelp.tokenSecret}" />
+	</beans:bean>
+
+
+	<!-- Factory bean that creates the Mongo instance -->
+	<beans:bean id="mongo"
+		class="org.springframework.data.mongodb.core.MongoFactoryBean">
+		<beans:property name="host" value="localhost" />
+	</beans:bean>
+
+	<!-- MongoTemplate for connecting and quering the documents in the database -->
+	<beans:bean id="mongoTemplate"	class="org.springframework.data.mongodb.core.MongoTemplate">
+		<beans:constructor-arg name="mongo" ref="mongo" />
+		<beans:constructor-arg name="databaseName"	value="waspit" />
+	</beans:bean>
+		
+	<beans:bean id="database"	class="org.jcouchdb.db.Database">
+		<beans:constructor-arg type="java.lang.String" value="localhost" />
+		<beans:constructor-arg type="java.lang.String"	value="waspit" />
+	</beans:bean>
+	
+	<mongo:repositories base-package="com.main.interconnection.mongo.pagination.repository">
+	</mongo:repositories>
+	<!-- Use this post processor to translate any MongoExceptions thrown in 
+		@Repository annotated classes -->
+	<beans:bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
+	<beans:bean id="setsolrdocuments"
+		class="com.main.interconnection.solr.helper.SetSolrDocuments" />
+		
+		
+	 	 
+	<beans:bean id="twitterUserService" class="com.main.interconnection.twitterImpl.TwitterUserServiceImpl" />
+	<beans:bean id="twitterPostService" class="com.main.interconnection.twitterImpl.TwitterPostServiceImpl" />
+	
+	
+	<beans:bean id="connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
+		<beans:property name="connectionFactories">
+	        <beans:list>
+	            <beans:bean class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
+	                <beans:constructor-arg value="${twitter.consumerKey}" />
+	                <beans:constructor-arg value="${twitter.consumer.secret}" />				
+	            </beans:bean>
+	        </beans:list>
+	    </beans:property>
+	</beans:bean>
+	
+	<beans:bean id="foursquareapi"
+		class="com.main.interconnection.client.social.helpers.FourSquareAPI" />
+		
+	<beans:bean id="addSocialUser"
+		class="com.main.interconnection.client.social.helpers.AddSocialUser" />
+		
+	<beans:bean id="googleUserService" 
+		class="com.main.interconnection.googleImpl.GoogleUserServiceImpl" />
+		
+	
+
+	<!-- Spring Quartz -->
+		<beans:bean id="attemptResetTask" class="com.main.interconnection.util.AttemptResetTask" />
+	<beans:bean name="attemptResetJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+
+		<beans:property name="jobClass"
+			value="com.main.interconnection.util.AttemptResetJob" />
+
+		<beans:property name="jobDataAsMap">
+			<beans:map>
+				<beans:entry key="attemptResetTask" value-ref="attemptResetTask" />
+			</beans:map>
+		</beans:property>
+
+	</beans:bean>
+
+	<!-- <bean id="runMeJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+		<property name="targetObject" ref="runMeTask" /> <property name="targetMethod" 
+		value="printMe" /> </bean> -->
+
+	<!-- Simple Trigger, run every 5 seconds 0/5 * * * * ?" -->
+ <beans:bean id="simpleTrigger"	class="org.springframework.scheduling.quartz.CronTriggerBean">
+
+		<beans:property name="jobDetail" ref="attemptResetJob" />
+		<beans:property name="cronExpression" value="0 0/5 * * * ?" />
+
+	</beans:bean> 
+
+	<!-- Cron Trigger, run every 5 seconds -->
+<!-- 	<beans:bean id="cronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+
+		<beans:property name="jobDetail" ref="runMeJob" />
+		<beans:property name="cronExpression" value="0/5 * * * * ?" />
+
+	</beans:bean> -->
+
+	<beans:bean	class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<beans:property name="jobDetails">
+			<beans:list>
+				<beans:ref bean="attemptResetJob" />
+			</beans:list>
+		</beans:property>
+
+		<beans:property name="triggers">
+			<beans:list>
+				<beans:ref bean="simpleTrigger" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+</beans:beans>
