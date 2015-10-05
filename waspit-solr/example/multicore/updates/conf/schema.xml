@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<schema name="example core one" version="1.1">
+  <types>
+	<fieldtype name="string"  class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="pint" class="solr.IntField" omitNorms="true"/>
+    <fieldType name="plong" class="solr.LongField" omitNorms="true"/>
+    <fieldType name="pfloat" class="solr.FloatField" omitNorms="true"/>
+    <fieldType name="pdouble" class="solr.DoubleField" omitNorms="true"/>
+    <fieldType name="pdate" class="solr.DateField" sortMissingLast="true" omitNorms="true"/>
+  
+  
+  </types>
+
+ <fields>   
+  <!-- general -->
+  <field name="updateId" type="string"    indexed="true"  stored="true"  multiValued="false" required="true"/>
+  <field name="updateType"     type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="updateSubType"     type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="updateProperty"     type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="userId"    type="string"    indexed="true"  stored="true"  multiValued="false" />   
+  <field name="projectId"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="updateDate" type="pdate" indexed="true" stored="true"/>
+  <field name="threadId"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  
+  <field name="userName"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="projectName"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="thraedName"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="projectType"    type="pint"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="projectStatus"    type="pint"    indexed="true"  stored="true"  multiValued="false" /> 
+  
+  <field name="messageId"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="messageName"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  
+  <field name="commentId"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="commentDesc"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  
+  <field name="taskId"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="assignUserId"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="taskName"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="taskType"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  
+  <field name="timesheet_id"    type="string"    indexed="true"  stored="true"  multiValued="false" /> 
+  <field name="timesheet_date" type="pdate" indexed="true" stored="true"/>
+  <field name="add_date" type="pdate" indexed="true" stored="true"/>
+  
+  
+  
+  
+  
+ </fields>
+
+ <!-- field to use to determine and enforce document uniqueness. -->
+ <uniqueKey>updateId</uniqueKey>
+
+ <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+ <defaultSearchField>updateType</defaultSearchField>
+
+ <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+ <solrQueryParser defaultOperator="OR"/>
+</schema>
+

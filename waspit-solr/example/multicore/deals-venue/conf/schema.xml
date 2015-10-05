@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<schema name="example core zero" version="1.1">
+  <types>
+   <fieldtype name="string"  class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="pint" class="solr.IntField" omitNorms="true"/>
+    <fieldType name="plong" class="solr.LongField" omitNorms="true"/>
+    <fieldType name="pfloat" class="solr.FloatField" omitNorms="true"/>
+    <fieldType name="pdouble" class="solr.DoubleField" omitNorms="true"/>
+    <fieldType name="pdate" class="solr.DateField" sortMissingLast="true" omitNorms="true"/>	
+	<fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
+   <fieldType name="tdouble" class="solr.TrieDoubleField" precisionStep="8" positionIncrementGap="0"/>
+  </types>
+
+ <fields>   
+  <!-- general -->
+  <field name="venue_id" type="string" indexed="true" stored="true" required="true" /> 
+   <field name="user_id" type="string" indexed="true" stored="true" omitNorms="true"/>
+   <field name="venue_name" type="string" indexed="true" stored="true"/>
+   <field name="venue_add_date" type="pdate" indexed="true" stored="true"/>
+   <field name="venue_address" type="string" indexed="true" stored="true"/>
+   <field name="venue_city_id" type="string" indexed="true" stored="true"/>   
+   <field name="venue_state_id" type="string" indexed="true" stored="true"/>
+   <field name="venue_zip_code" type="string" indexed="true" stored="true"/>
+   <field name="venue_lati" type="string" indexed="true" stored="true"/>
+   <field name="venue_long" type="string" indexed="true" stored="true"/>
+   <field name="venue_phone_no" type="string" indexed="true" stored="true"/>
+   <field name="hour_Of_Operation" type="string" indexed="true" stored="true"/>
+   <field name="website" type="string" indexed="true" stored="true"/>   
+   <field name="venue_category_id" type="string" indexed="true" stored="true"/>   
+   <field name="venue_photo_link" type="string" indexed="true" stored="true"/>
+   <field name="venue_info" type="string" indexed="true" stored="true"/>   
+   <field name="venue_status" type="string" indexed="true" stored="true"/>
+   <field name="conform_venue" type="string" indexed="true" stored="true"/>
+   <field name="phone_no_flag" type="string" indexed="true" stored="true"/>
+   <field name="address_flag" type="string" indexed="true" stored="true"/>
+   <field name="website_flag" type="string" indexed="true" stored="true"/>
+   <field name="photo_flag" type="string" indexed="true" stored="true"/>
+   <field name="comment_flag" type="string" indexed="true" stored="true"/>
+   
+   <field name="store_loc" type="location" indexed="true" stored="true"/>
+   
+   <dynamicField name="*_coordinate"  type="tdouble" indexed="true"  stored="false"/>
+   
+ </fields>
+
+ <!-- field to use to determine and enforce document uniqueness. -->
+ <uniqueKey>venue_id</uniqueKey>
+
+ <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+ <defaultSearchField>venue_name</defaultSearchField>
+
+ <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+ <solrQueryParser defaultOperator="OR"/>
+</schema>
+

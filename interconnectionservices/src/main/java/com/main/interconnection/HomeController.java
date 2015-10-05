@@ -46,11 +46,7 @@ public class HomeController {
 	//	https://partner-api.groupon.com/deals.json?tsToken={token}&division_id={id}&offset={offset}&limit={limit}
 		logger.info("---------------------------------->");
 		
-		model.addAttribute("serverTime", formattedDate );
-				
-		
-		
-		
+		model.addAttribute("serverTime", formattedDate );	
 		
 		return "home";
 	}

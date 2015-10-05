@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<schema name="example core one" version="1.1">
+  <types>
+   <fieldtype name="string"  class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+   
+    <fieldType name="text_rev" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" splitOnCaseChange="0"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.ReversedWildcardFilterFactory" withOriginal="true"
+           maxPosAsterisk="3" maxPosQuestion="2" maxFractionAsterisk="0.33"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+        <filter class="solr.StopFilterFactory"
+                ignoreCase="true"
+                words="stopwords.txt"
+                enablePositionIncrements="true"
+                />
+        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0" catenateNumbers="0" catenateAll="0" splitOnCaseChange="0"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>  
+  </types>
+
+ <fields>   
+  <!-- general -->
+  <field name="deal_uuid"       type="string"    indexed="true"  stored="true"  multiValued="false" required="true"/>
+  <field name="deal_lati" type="string" indexed="true" stored="true"/>
+	<field name="deal_long" type="string" indexed="true" stored="true"/>  
+	<field name="street" type="string" indexed="true" stored="true"/>
+	<field name="deal_type" type="string" indexed="true" stored="true"/>
+	<field name="discount" type="string" indexed="true" stored="true"/>
+	<field name="discountPercent" type="string" indexed="true" stored="true"/>
+	<field name="grouponRating" type="string" indexed="true" stored="true"/>
+	<field name="para" type="string" indexed="true" stored="true"/>
+	<field name="mapImageUrl" type="string" indexed="true" stored="true"/>
+	<field name="largeImageUrl" type="string" indexed="true" stored="true"/>
+	<field name="mediumImageUrl" type="string" indexed="true" stored="true"/>
+	<field name="shortAnnouncementTitle" type="string" indexed="true" stored="true"/>
+	<field name="title" type="string" indexed="true" stored="true"/>
+	<field name="deal_name" type="string" indexed="true" stored="true"/>
+	<field name="websiteUrl" type="string" indexed="true" stored="true"/>
+	<field name="startAt" type="string" indexed="true" stored="true"/>
+	<field name="endAt" type="string" indexed="true" stored="true"/>
+	<field name="expiresAt" type="string" indexed="true" stored="true"/>
+	<field name="expiresAtFormated" type="string" indexed="true" stored="true"/>
+	<field name="description" type="string" indexed="true" stored="true"/>
+	<field name="buyUrl" type="string" indexed="true" stored="true"/>
+	<field name="price" type="string" indexed="true" stored="true"/>
+	
+	<field name="deal_name_search" type="text_rev" indexed="true" stored="true"/>
+	
+ </fields>
+
+ <!-- field to use to determine and enforce document uniqueness. -->
+ <uniqueKey>deal_uuid</uniqueKey>
+
+ <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+ <defaultSearchField>deal_name_search</defaultSearchField>
+
+ <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+ <solrQueryParser defaultOperator="OR"/>
+</schema>
+
