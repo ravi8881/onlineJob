@@ -28,7 +28,7 @@
 
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>4.0.5.RELEASE</org.springframework-version>
+		<org.springframework-version>5.2.7.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
 		<jcouchdb.version>0.11.0-1</jcouchdb.version>
